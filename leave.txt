@@ -1,0 +1,108 @@
+<?php
+// LeaveController.php
+
+defined('BASEPATH') or exit ('No direct script access allowed');
+
+class LeaveController extends CI_Controller
+{
+
+    public function __construct()
+    {
+        parent::__construct();
+        // Load any necessary models or helpers here if needed
+    }
+
+    public function applyLeave()
+    {
+        $employeeId = $this->input->post('employeeId');
+        $employee_name = $this->input->post('employeeName');
+
+        // print_r($employee_name);
+        // exit;
+
+
+        // Check if the form is submitted
+        if ($this->input->post()) {
+            // Assuming you have a model named Leave_model to handle database operations
+            $this->load->model('Leave_model');
+
+            // Get form data
+            $start_date = $this->input->post('start_date');
+            $end_date = $this->input->post('end_date');
+            $reason = $this->input->post('reason');
+
+            // Example: Saving leave application to database
+            $leave_data = array(
+                'employee_id' => $employeeId,
+                'name' => $employee_name,
+                'start_date' => $start_date,
+                'end_date' => $end_date,
+                'reason' => $reason
+            );
+            // print_r($leave_data);
+            // exit;
+
+
+            // Call model function to save leave data
+            $result = $this->Leave_model->saveLeave($leave_data);
+
+            if ($result) {
+                // Leave application successfully saved
+                // You can redirect to a success page or do any other action
+                $this->session->set_flashdata('success', 'Leave applied successfully.');
+                redirect('profile/index');
+               
+            } else {
+                // Failed to save leave application
+                // You can redirect back to the form with an error message or do any other action
+                redirect('', 'refresh');
+            }
+        } else {
+            // If form is not submitted, redirect to leave application form
+            redirect('');
+        }
+    }
+}
+--------------------------------------------------------------------------------------------------------------------------------
+
+
+<?php
+// Leave_model.php (models/Leave_model.php)
+
+defined('BASEPATH') or exit ('No direct script access allowed');
+
+class Leave_model extends CI_Model
+{
+
+    public function __construct()
+    {
+        parent::__construct();
+        // Load database library if not autoloaded
+        // $this->load->database();
+    }
+    // public function index()
+    // {
+  
+
+    // // Fetch data from model
+    // $f_list['f_list'] = $this->your_model->get_data(); // Assuming you have a method like get_data() to fetch the data
+    
+    // // Load view
+    // $this->load->view('admin/index', $f_list);
+    // }
+
+    public function saveLeave($leave_data)
+    {
+        // Insert leave data into the database
+        $this->db->insert('leaves', $leave_data);
+
+        // Check if the leave application is successfully inserted
+        if ($this->db->affected_rows() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    
+}

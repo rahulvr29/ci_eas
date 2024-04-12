@@ -45,13 +45,18 @@
               </tbody>
             </table>
           </div>
-          </div>
+        </div>
+      </div>
+        
+      <div class="d-flex align-items-center justify-content-end px-3 mt-3">
+        <div class="mx-3">
+          <a href="<?php echo base_url('leave'); ?>" class="btn btn-primary">Apply Leave</a>
+        </div>
+        <div class="mx-3">
+          <a href="<?php echo base_url('leave/view_leave'); ?>" class="btn btn-secondary">Leave History</a>
+        </div>
       </div>
     </div>
   </div>
-
 </div>
 <!-- /.container-fluid -->
-
-</div>
-<!-- End of Main Content -->
