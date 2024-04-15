@@ -53,7 +53,7 @@
           <a href="<?php echo base_url('leave'); ?>" class="btn btn-primary">Apply Leave</a>
         </div>
         <div class="mx-3">
-          <a href="<?php echo base_url('leave/view_leave'); ?>" class="btn btn-secondary">Leave History</a>
+          <a href="<?php echo base_url('leave/history'); ?>" class="btn btn-secondary">Leave History</a>
         </div>
       </div>
     </div>

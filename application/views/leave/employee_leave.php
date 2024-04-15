@@ -12,40 +12,32 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- DataTables CSS -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <style>
+        /* Optional: Add custom CSS here */
+    </style>
 </head>
 
 <body>
-    <div class="container mt-5">
-        <div class='d-flex align-items-center justify-content-between'>
-            <h1>All Emplyoee's Leave History</h1>
-            <!-- Back button -->
-            <a href="<?php echo base_url('admin'); ?>" class="btn btn-primary">Back </a>
+    <div class="container">
+        <div class="d-flex align-items-center justify-content-between mt-5">
+        <h1 class="mt-4 mb-3">My Leave History</h1>
+        <!-- Back button -->
+        <a href="<?php echo base_url('profile'); ?>" class="btn btn-primary">Back to Profile</a>
         </div>
         <table id="leaveList" class="table">
             <thead class="thead-dark">
                 <tr>
-                    <th>Leave ID</th>
-                    <th>Employee ID</th>
-                    <th>Employee Email</th>
                     <th>Leave Reason</th>
                     <th>Leave From</th>
                     <th>Leave To</th>
                     <th>Description</th>
                     <th>Status</th>
+                    <th>Applied On</th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($leave_list as $leave): ?>
+                <?php foreach ($leave_history as $leave): ?>
                     <tr>
-                        <td>
-                            <?php echo $leave['id']; ?>
-                        </td>
-                        <td>
-                            <?php echo $leave['employee_id']; ?>
-                        </td>
-                        <td>
-                            <?php echo $leave['employeeName']; ?>
-                        </td>
                         <td>
                             <?php echo $leave['leave_reason']; ?>
                         </td>
@@ -73,11 +65,17 @@
                                 </span>
                             <?php endif; ?>
                         </td>
+                        <td>
+                            <?php echo $leave['applied_on']; ?>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
+        
     </div>
+    <!-- Bootstrap JS (optional, if you need it) -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- DataTables JS -->

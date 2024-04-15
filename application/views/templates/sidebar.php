@@ -57,7 +57,7 @@
     </a>
     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
     <a class="dropdown-item" href="<?php echo base_url('leave/approve'); ?> ">Manage Employee's Leave</a>
-      <a class="dropdown-item" href="<?php echo base_url('leave/view_leave'); ?>">Leave History</a>
+      <a class="dropdown-item" href="<?php echo base_url('leave/leave_history'); ?>">Leave History</a>
     </div>
   </li>
 <?php endif; ?>
