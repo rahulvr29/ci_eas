@@ -4,6 +4,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Admin_model extends CI_Model
 {
 
+  public function get_all_leave_requests() {
+    // Query to fetch all pending leave requests from your database
+    $this->db->where('status', 'pending');
+    $query = $this->db->get('leave_requests');
+    return $query->result();
+}
+
   public function get_admin_by_username($username)
     {
         // Get admin data by username

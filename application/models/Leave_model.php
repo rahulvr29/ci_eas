@@ -27,33 +27,6 @@ class Leave_model extends CI_Model
         $this->db->update('leave_requests', $data);
     }
 
-    public function select_leave(){
-        $this->db->order_by('leave.id', 'DESC');
-        $this->db->from("leave_requests");
-        $this->db->join("employee_department", 'employee_department.employee_id = leave.employee_id'); // Corrected join condition
-        $this->db->join("department", 'department.id = employee_department.department_id');
-        $qry = $this->db->get();
-        if ($qry->num_rows() > 0) {
-            $result = $qry->result_array();
-            return $result;
-        }
-    }
-
-    public function get_leave_data()
-    {
-        // Fetch all data from the leave table
-        $query = $this->db->get('leave_requests');
-
-        // Return the result as an array
-        return $query->result_array();
-    }
-    function delete_department($id)
-    {
-        $this->db->where('id', $id);
-        $this->db->delete("department");
-        $this->db->affected_rows();
-    }
-
     public function get_all_leave_requests()
     {
         return $this->db->get('leave_requests')->result_array();
@@ -63,26 +36,6 @@ class Leave_model extends CI_Model
     {
         $this->db->where('status', 'pending');
         return $this->db->get('leave_requests')->result_array();
-    }
-
-    public function getAllEmployeeData($username)
-    {
-        $data = $this->db->get_where('users', ['username' => $username])->row_array();
-        $e_id = $data['employee_id'];
-
-        $query = "SELECT employee.id AS `id`,
-                         employee.name AS `name`,
-                         employee.gender AS `gender`,
-                         employee.image AS `image`,
-                         employee.birth_date AS `birth_date`,
-                         employee.hire_date AS `hire_date`,
-                         department.name AS `department`
-                   FROM employee
-             INNER JOIN employee_department ON employee.id = employee_department.employee_id
-             INNER JOIN department ON employee_department.department_id = department.id
-                  WHERE `employee`.`id` = $e_id";
-
-        return $this->db->query($query)->row_array();
     }
 
     public function get_leave_history($employee_id)

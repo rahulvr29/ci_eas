@@ -36,7 +36,6 @@ class Leave extends CI_Controller
             if ($data) {
                 $employee_id = $data['id']; // Assuming 'id' contains employee_id
                 $employee_email = $data['email']; // Assuming 'email' is the field name for employee name
-
                 $reason = $this->input->post('txtreason');
                 $leave_from = $this->input->post('txtleavefrom');
                 $leave_to = $this->input->post('txtleaveto');
