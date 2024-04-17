@@ -34,6 +34,7 @@ class Leave extends CI_Controller
             $data = $this->db->get_where('employee', ['id' => $e_id])->row_array();
 
             if ($data) {
+
                 $employee_id = $data['id']; // Assuming 'id' contains employee_id
                 $employee_email = $data['email']; // Assuming 'email' is the field name for employee name
                 $reason = $this->input->post('txtreason');
@@ -67,7 +68,7 @@ class Leave extends CI_Controller
             }
         }
 
-        redirect($_SERVER['HTTP_REFERER']);
+        redirect('leave');
     }
     public function history()
     {
@@ -93,9 +94,7 @@ class Leave extends CI_Controller
         $this->load->view('leave/approve_leave', $data);
     }
     public function approve_leave($leave_id){
-        // Update leave status to 'approved' in the database
         $this->Leave_model->update_leave_status($leave_id, 'approved');
-        // Set flash message for successful approval
         $this->session->set_flashdata('success', 'Successfully approved the leave');
         // Redirect back to the leave list page
         redirect('leave/approve');
